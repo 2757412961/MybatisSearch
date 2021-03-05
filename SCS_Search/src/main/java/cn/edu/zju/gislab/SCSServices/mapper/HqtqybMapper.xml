@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.gislab.SCSServices.mapper.HqtqybMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.zju.gislab.SCSServices.po.Hqtqyb" >
+    <id column="YBTC" property="ybtc" jdbcType="DECIMAL" />
+    <id column="HQBH" property="hqbh" jdbcType="DECIMAL" />
+    <result column="QBSJ" property="qbsj" jdbcType="TIMESTAMP" />
+    <result column="TQQK" property="tqqk" jdbcType="VARCHAR" />
+    <result column="FX" property="fx" jdbcType="VARCHAR" />
+    <result column="FS" property="fs" jdbcType="VARCHAR" />
+    <result column="SCFW" property="scfw" jdbcType="VARCHAR" />
+    <result column="FL" property="fl" jdbcType="VARCHAR" />
+    <result column="YL" property="yl" jdbcType="VARCHAR" />
+    <result column="HQMC" property="hqmc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    YBTC, HQBH, QBSJ, TQQK, FX, FS, SCFW, FL, YL, HQMC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.zju.gislab.SCSServices.po.HqtqybExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from HQTQYB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.edu.zju.gislab.SCSServices.po.HqtqybKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from HQTQYB
+    where YBTC = #{ybtc,jdbcType=DECIMAL}
+      and HQBH = #{hqbh,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.edu.zju.gislab.SCSServices.po.HqtqybKey" >
+    delete from HQTQYB
+    where YBTC = #{ybtc,jdbcType=DECIMAL}
+      and HQBH = #{hqbh,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.HqtqybExample" >
+    delete from HQTQYB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zju.gislab.SCSServices.po.Hqtqyb" >
+    insert into HQTQYB (YBTC, HQBH, QBSJ, 
+      TQQK, FX, FS, SCFW, 
+      FL, YL, HQMC)
+    values (#{ybtc,jdbcType=DECIMAL}, #{hqbh,jdbcType=DECIMAL}, #{qbsj,jdbcType=TIMESTAMP}, 
+      #{tqqk,jdbcType=VARCHAR}, #{fx,jdbcType=VARCHAR}, #{fs,jdbcType=VARCHAR}, #{scfw,jdbcType=VARCHAR}, 
+      #{fl,jdbcType=VARCHAR}, #{yl,jdbcType=VARCHAR}, #{hqmc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zju.gislab.SCSServices.po.Hqtqyb" >
+    insert into HQTQYB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ybtc != null" >
+        YBTC,
+      </if>
+      <if test="hqbh != null" >
+        HQBH,
+      </if>
+      <if test="qbsj != null" >
+        QBSJ,
+      </if>
+      <if test="tqqk != null" >
+        TQQK,
+      </if>
+      <if test="fx != null" >
+        FX,
+      </if>
+      <if test="fs != null" >
+        FS,
+      </if>
+      <if test="scfw != null" >
+        SCFW,
+      </if>
+      <if test="fl != null" >
+        FL,
+      </if>
+      <if test="yl != null" >
+        YL,
+      </if>
+      <if test="hqmc != null" >
+        HQMC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ybtc != null" >
+        #{ybtc,jdbcType=DECIMAL},
+      </if>
+      <if test="hqbh != null" >
+        #{hqbh,jdbcType=DECIMAL},
+      </if>
+      <if test="qbsj != null" >
+        #{qbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tqqk != null" >
+        #{tqqk,jdbcType=VARCHAR},
+      </if>
+      <if test="fx != null" >
+        #{fx,jdbcType=VARCHAR},
+      </if>
+      <if test="fs != null" >
+        #{fs,jdbcType=VARCHAR},
+      </if>
+      <if test="scfw != null" >
+        #{scfw,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="yl != null" >
+        #{yl,jdbcType=VARCHAR},
+      </if>
+      <if test="hqmc != null" >
+        #{hqmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.HqtqybExample" resultType="java.lang.Integer" >
+    select count(*) from HQTQYB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update HQTQYB
+    <set >
+      <if test="record.ybtc != null" >
+        YBTC = #{record.ybtc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hqbh != null" >
+        HQBH = #{record.hqbh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.qbsj != null" >
+        QBSJ = #{record.qbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tqqk != null" >
+        TQQK = #{record.tqqk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fx != null" >
+        FX = #{record.fx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fs != null" >
+        FS = #{record.fs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scfw != null" >
+        SCFW = #{record.scfw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fl != null" >
+        FL = #{record.fl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yl != null" >
+        YL = #{record.yl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hqmc != null" >
+        HQMC = #{record.hqmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update HQTQYB
+    set YBTC = #{record.ybtc,jdbcType=DECIMAL},
+      HQBH = #{record.hqbh,jdbcType=DECIMAL},
+      QBSJ = #{record.qbsj,jdbcType=TIMESTAMP},
+      TQQK = #{record.tqqk,jdbcType=VARCHAR},
+      FX = #{record.fx,jdbcType=VARCHAR},
+      FS = #{record.fs,jdbcType=VARCHAR},
+      SCFW = #{record.scfw,jdbcType=VARCHAR},
+      FL = #{record.fl,jdbcType=VARCHAR},
+      YL = #{record.yl,jdbcType=VARCHAR},
+      HQMC = #{record.hqmc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.zju.gislab.SCSServices.po.Hqtqyb" >
+    update HQTQYB
+    <set >
+      <if test="qbsj != null" >
+        QBSJ = #{qbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tqqk != null" >
+        TQQK = #{tqqk,jdbcType=VARCHAR},
+      </if>
+      <if test="fx != null" >
+        FX = #{fx,jdbcType=VARCHAR},
+      </if>
+      <if test="fs != null" >
+        FS = #{fs,jdbcType=VARCHAR},
+      </if>
+      <if test="scfw != null" >
+        SCFW = #{scfw,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        FL = #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="yl != null" >
+        YL = #{yl,jdbcType=VARCHAR},
+      </if>
+      <if test="hqmc != null" >
+        HQMC = #{hqmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where YBTC = #{ybtc,jdbcType=DECIMAL}
+      and HQBH = #{hqbh,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.zju.gislab.SCSServices.po.Hqtqyb" >
+    update HQTQYB
+    set QBSJ = #{qbsj,jdbcType=TIMESTAMP},
+      TQQK = #{tqqk,jdbcType=VARCHAR},
+      FX = #{fx,jdbcType=VARCHAR},
+      FS = #{fs,jdbcType=VARCHAR},
+      SCFW = #{scfw,jdbcType=VARCHAR},
+      FL = #{fl,jdbcType=VARCHAR},
+      YL = #{yl,jdbcType=VARCHAR},
+      HQMC = #{hqmc,jdbcType=VARCHAR}
+    where YBTC = #{ybtc,jdbcType=DECIMAL}
+      and HQBH = #{hqbh,jdbcType=DECIMAL}
+  </update>
+</mapper>

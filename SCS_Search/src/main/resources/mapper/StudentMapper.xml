@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zju.gislab.SCSServices.dao.StudentMapper">
+
+    <!--   多对一 方式一    -->
+    <resultMap id="StudentMap" type="Student">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <association column="tid"
+                     property="teacher"
+                     javaType="Teacher"
+                     select="cn.edu.zju.gislab.SCSServices.dao.TeacherMapper.getTeacherByID"/>
+    </resultMap>
+
+    <select id="getAllStudents" resultMap="StudentMap">
+        SELECT *
+        FROM student
+    </select>
+
+    <!--    多对一 方式二    -->
+    <resultMap id="StudentMap2" type="Student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="Teacher">
+            <result property="id" column="tid"/>
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+
+    <select id="getAllStudents2" resultMap="StudentMap2">
+        SELECT s.id sid, s.name sname, tid, t.name tname
+        FROM student s, teacher t
+        WHERE s.tid = t.id
+    </select>
+
+
+</mapper>

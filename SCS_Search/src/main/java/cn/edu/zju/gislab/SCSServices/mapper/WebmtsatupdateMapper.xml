@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.gislab.SCSServices.mapper.WebmtsatupdateMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.zju.gislab.SCSServices.po.Webmtsatupdate" >
+    <result column="LOWLEVEL" property="lowlevel" jdbcType="VARCHAR" />
+    <result column="MIDUPLEVEL" property="miduplevel" jdbcType="VARCHAR" />
+    <result column="WINDSHEAK" property="windsheak" jdbcType="VARCHAR" />
+    <result column="HOURWINDSHEAK" property="hourwindsheak" jdbcType="VARCHAR" />
+    <result column="RELATVORT" property="relatvort" jdbcType="VARCHAR" />
+    <result column="WINDSHEAKPROD" property="windsheakprod" jdbcType="VARCHAR" />
+    <result column="DIVERGENCE" property="divergence" jdbcType="VARCHAR" />
+    <result column="CONVERGENCE" property="convergence" jdbcType="VARCHAR" />
+    <result column="ENVSTEER_7" property="envsteer7" jdbcType="VARCHAR" />
+    <result column="ENVSTEER_5" property="envsteer5" jdbcType="VARCHAR" />
+    <result column="CENVSTEER_4" property="cenvsteer4" jdbcType="VARCHAR" />
+    <result column="ENVSTEER_3" property="envsteer3" jdbcType="VARCHAR" />
+    <result column="ENVSTEER_25" property="envsteer25" jdbcType="VARCHAR" />
+    <result column="ENVSTEER_2" property="envsteer2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOWLEVEL, MIDUPLEVEL, WINDSHEAK, HOURWINDSHEAK, RELATVORT, WINDSHEAKPROD, DIVERGENCE, 
+    CONVERGENCE, ENVSTEER_7, ENVSTEER_5, CENVSTEER_4, ENVSTEER_3, ENVSTEER_25, ENVSTEER_2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.zju.gislab.SCSServices.po.WebmtsatupdateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEBMTSATUPDATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.WebmtsatupdateExample" >
+    delete from WEBMTSATUPDATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zju.gislab.SCSServices.po.Webmtsatupdate" >
+    insert into WEBMTSATUPDATE (LOWLEVEL, MIDUPLEVEL, WINDSHEAK, 
+      HOURWINDSHEAK, RELATVORT, WINDSHEAKPROD, 
+      DIVERGENCE, CONVERGENCE, ENVSTEER_7, 
+      ENVSTEER_5, CENVSTEER_4, ENVSTEER_3, 
+      ENVSTEER_25, ENVSTEER_2)
+    values (#{lowlevel,jdbcType=VARCHAR}, #{miduplevel,jdbcType=VARCHAR}, #{windsheak,jdbcType=VARCHAR}, 
+      #{hourwindsheak,jdbcType=VARCHAR}, #{relatvort,jdbcType=VARCHAR}, #{windsheakprod,jdbcType=VARCHAR}, 
+      #{divergence,jdbcType=VARCHAR}, #{convergence,jdbcType=VARCHAR}, #{envsteer7,jdbcType=VARCHAR}, 
+      #{envsteer5,jdbcType=VARCHAR}, #{cenvsteer4,jdbcType=VARCHAR}, #{envsteer3,jdbcType=VARCHAR}, 
+      #{envsteer25,jdbcType=VARCHAR}, #{envsteer2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zju.gislab.SCSServices.po.Webmtsatupdate" >
+    insert into WEBMTSATUPDATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lowlevel != null" >
+        LOWLEVEL,
+      </if>
+      <if test="miduplevel != null" >
+        MIDUPLEVEL,
+      </if>
+      <if test="windsheak != null" >
+        WINDSHEAK,
+      </if>
+      <if test="hourwindsheak != null" >
+        HOURWINDSHEAK,
+      </if>
+      <if test="relatvort != null" >
+        RELATVORT,
+      </if>
+      <if test="windsheakprod != null" >
+        WINDSHEAKPROD,
+      </if>
+      <if test="divergence != null" >
+        DIVERGENCE,
+      </if>
+      <if test="convergence != null" >
+        CONVERGENCE,
+      </if>
+      <if test="envsteer7 != null" >
+        ENVSTEER_7,
+      </if>
+      <if test="envsteer5 != null" >
+        ENVSTEER_5,
+      </if>
+      <if test="cenvsteer4 != null" >
+        CENVSTEER_4,
+      </if>
+      <if test="envsteer3 != null" >
+        ENVSTEER_3,
+      </if>
+      <if test="envsteer25 != null" >
+        ENVSTEER_25,
+      </if>
+      <if test="envsteer2 != null" >
+        ENVSTEER_2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lowlevel != null" >
+        #{lowlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="miduplevel != null" >
+        #{miduplevel,jdbcType=VARCHAR},
+      </if>
+      <if test="windsheak != null" >
+        #{windsheak,jdbcType=VARCHAR},
+      </if>
+      <if test="hourwindsheak != null" >
+        #{hourwindsheak,jdbcType=VARCHAR},
+      </if>
+      <if test="relatvort != null" >
+        #{relatvort,jdbcType=VARCHAR},
+      </if>
+      <if test="windsheakprod != null" >
+        #{windsheakprod,jdbcType=VARCHAR},
+      </if>
+      <if test="divergence != null" >
+        #{divergence,jdbcType=VARCHAR},
+      </if>
+      <if test="convergence != null" >
+        #{convergence,jdbcType=VARCHAR},
+      </if>
+      <if test="envsteer7 != null" >
+        #{envsteer7,jdbcType=VARCHAR},
+      </if>
+      <if test="envsteer5 != null" >
+        #{envsteer5,jdbcType=VARCHAR},
+      </if>
+      <if test="cenvsteer4 != null" >
+        #{cenvsteer4,jdbcType=VARCHAR},
+      </if>
+      <if test="envsteer3 != null" >
+        #{envsteer3,jdbcType=VARCHAR},
+      </if>
+      <if test="envsteer25 != null" >
+        #{envsteer25,jdbcType=VARCHAR},
+      </if>
+      <if test="envsteer2 != null" >
+        #{envsteer2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.WebmtsatupdateExample" resultType="java.lang.Integer" >
+    select count(*) from WEBMTSATUPDATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WEBMTSATUPDATE
+    <set >
+      <if test="record.lowlevel != null" >
+        LOWLEVEL = #{record.lowlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.miduplevel != null" >
+        MIDUPLEVEL = #{record.miduplevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windsheak != null" >
+        WINDSHEAK = #{record.windsheak,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hourwindsheak != null" >
+        HOURWINDSHEAK = #{record.hourwindsheak,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relatvort != null" >
+        RELATVORT = #{record.relatvort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.windsheakprod != null" >
+        WINDSHEAKPROD = #{record.windsheakprod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.divergence != null" >
+        DIVERGENCE = #{record.divergence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.convergence != null" >
+        CONVERGENCE = #{record.convergence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.envsteer7 != null" >
+        ENVSTEER_7 = #{record.envsteer7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.envsteer5 != null" >
+        ENVSTEER_5 = #{record.envsteer5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cenvsteer4 != null" >
+        CENVSTEER_4 = #{record.cenvsteer4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.envsteer3 != null" >
+        ENVSTEER_3 = #{record.envsteer3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.envsteer25 != null" >
+        ENVSTEER_25 = #{record.envsteer25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.envsteer2 != null" >
+        ENVSTEER_2 = #{record.envsteer2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WEBMTSATUPDATE
+    set LOWLEVEL = #{record.lowlevel,jdbcType=VARCHAR},
+      MIDUPLEVEL = #{record.miduplevel,jdbcType=VARCHAR},
+      WINDSHEAK = #{record.windsheak,jdbcType=VARCHAR},
+      HOURWINDSHEAK = #{record.hourwindsheak,jdbcType=VARCHAR},
+      RELATVORT = #{record.relatvort,jdbcType=VARCHAR},
+      WINDSHEAKPROD = #{record.windsheakprod,jdbcType=VARCHAR},
+      DIVERGENCE = #{record.divergence,jdbcType=VARCHAR},
+      CONVERGENCE = #{record.convergence,jdbcType=VARCHAR},
+      ENVSTEER_7 = #{record.envsteer7,jdbcType=VARCHAR},
+      ENVSTEER_5 = #{record.envsteer5,jdbcType=VARCHAR},
+      CENVSTEER_4 = #{record.cenvsteer4,jdbcType=VARCHAR},
+      ENVSTEER_3 = #{record.envsteer3,jdbcType=VARCHAR},
+      ENVSTEER_25 = #{record.envsteer25,jdbcType=VARCHAR},
+      ENVSTEER_2 = #{record.envsteer2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

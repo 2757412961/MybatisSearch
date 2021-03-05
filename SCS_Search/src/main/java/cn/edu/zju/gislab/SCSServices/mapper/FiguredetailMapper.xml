@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.gislab.SCSServices.mapper.FiguredetailMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.zju.gislab.SCSServices.po.Figuredetail" >
+    <id column="FILEDATE" property="filedate" jdbcType="DATE" />
+    <id column="TIME" property="time" jdbcType="DECIMAL" />
+    <id column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="PATH" property="path" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="DATE" />
+    <result column="UPDATEDATE" property="updatedate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.edu.zju.gislab.SCSServices.po.Figuredetail" extends="BaseResultMap" >
+    <result column="NAMES" property="names" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FILEDATE, TIME, TYPE, PATH, CREATEDATE, UPDATEDATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    NAMES
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.edu.zju.gislab.SCSServices.po.FiguredetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from FIGUREDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.zju.gislab.SCSServices.po.FiguredetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from FIGUREDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="cn.edu.zju.gislab.SCSServices.po.FiguredetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from FIGUREDETAIL
+    where FILEDATE = #{filedate,jdbcType=DATE}
+      and TIME = #{time,jdbcType=DECIMAL}
+      and TYPE = #{type,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.edu.zju.gislab.SCSServices.po.FiguredetailKey" >
+    delete from FIGUREDETAIL
+    where FILEDATE = #{filedate,jdbcType=DATE}
+      and TIME = #{time,jdbcType=DECIMAL}
+      and TYPE = #{type,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.FiguredetailExample" >
+    delete from FIGUREDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zju.gislab.SCSServices.po.Figuredetail" >
+    insert into FIGUREDETAIL (FILEDATE, TIME, TYPE, 
+      PATH, CREATEDATE, UPDATEDATE, 
+      NAMES)
+    values (#{filedate,jdbcType=DATE}, #{time,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{updatedate,jdbcType=DATE}, 
+      #{names,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zju.gislab.SCSServices.po.Figuredetail" >
+    insert into FIGUREDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="filedate != null" >
+        FILEDATE,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="path != null" >
+        PATH,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="updatedate != null" >
+        UPDATEDATE,
+      </if>
+      <if test="names != null" >
+        NAMES,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="filedate != null" >
+        #{filedate,jdbcType=DATE},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="names != null" >
+        #{names,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.FiguredetailExample" resultType="java.lang.Integer" >
+    select count(*) from FIGUREDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update FIGUREDETAIL
+    <set >
+      <if test="record.filedate != null" >
+        FILEDATE = #{record.filedate,jdbcType=DATE},
+      </if>
+      <if test="record.time != null" >
+        TIME = #{record.time,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        PATH = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=DATE},
+      </if>
+      <if test="record.updatedate != null" >
+        UPDATEDATE = #{record.updatedate,jdbcType=DATE},
+      </if>
+      <if test="record.names != null" >
+        NAMES = #{record.names,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update FIGUREDETAIL
+    set FILEDATE = #{record.filedate,jdbcType=DATE},
+      TIME = #{record.time,jdbcType=DECIMAL},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      PATH = #{record.path,jdbcType=VARCHAR},
+      CREATEDATE = #{record.createdate,jdbcType=DATE},
+      UPDATEDATE = #{record.updatedate,jdbcType=DATE},
+      NAMES = #{record.names,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update FIGUREDETAIL
+    set FILEDATE = #{record.filedate,jdbcType=DATE},
+      TIME = #{record.time,jdbcType=DECIMAL},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      PATH = #{record.path,jdbcType=VARCHAR},
+      CREATEDATE = #{record.createdate,jdbcType=DATE},
+      UPDATEDATE = #{record.updatedate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.zju.gislab.SCSServices.po.Figuredetail" >
+    update FIGUREDETAIL
+    <set >
+      <if test="path != null" >
+        PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="updatedate != null" >
+        UPDATEDATE = #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="names != null" >
+        NAMES = #{names,jdbcType=CLOB},
+      </if>
+    </set>
+    where FILEDATE = #{filedate,jdbcType=DATE}
+      and TIME = #{time,jdbcType=DECIMAL}
+      and TYPE = #{type,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.edu.zju.gislab.SCSServices.po.Figuredetail" >
+    update FIGUREDETAIL
+    set PATH = #{path,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=DATE},
+      UPDATEDATE = #{updatedate,jdbcType=DATE},
+      NAMES = #{names,jdbcType=CLOB}
+    where FILEDATE = #{filedate,jdbcType=DATE}
+      and TIME = #{time,jdbcType=DECIMAL}
+      and TYPE = #{type,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.zju.gislab.SCSServices.po.Figuredetail" >
+    update FIGUREDETAIL
+    set PATH = #{path,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=DATE},
+      UPDATEDATE = #{updatedate,jdbcType=DATE}
+    where FILEDATE = #{filedate,jdbcType=DATE}
+      and TIME = #{time,jdbcType=DECIMAL}
+      and TYPE = #{type,jdbcType=VARCHAR}
+  </update>
+  <select id="selectSingleSQL" parameterType="String" resultMap="ResultMapWithBLOBs">
+    ${sqlStr}
+  </select>
+</mapper>

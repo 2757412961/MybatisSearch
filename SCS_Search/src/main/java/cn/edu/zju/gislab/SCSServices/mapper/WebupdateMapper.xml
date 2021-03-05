@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.gislab.SCSServices.mapper.WebupdateMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.zju.gislab.SCSServices.po.Webupdate" >
+    <result column="TYPH_CENTER" property="typhCenter" jdbcType="VARCHAR" />
+    <result column="SATELLITE_PICT" property="satellitePict" jdbcType="VARCHAR" />
+    <result column="WEATHER_KOREA" property="weatherKorea" jdbcType="VARCHAR" />
+    <result column="SATELLITE_ANS" property="satelliteAns" jdbcType="VARCHAR" />
+    <result column="SATELLITE_REDGIF" property="satelliteRedgif" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TYPH_CENTER, SATELLITE_PICT, WEATHER_KOREA, SATELLITE_ANS, SATELLITE_REDGIF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.zju.gislab.SCSServices.po.WebupdateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEBUPDATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.WebupdateExample" >
+    delete from WEBUPDATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zju.gislab.SCSServices.po.Webupdate" >
+    insert into WEBUPDATE (TYPH_CENTER, SATELLITE_PICT, WEATHER_KOREA, 
+      SATELLITE_ANS, SATELLITE_REDGIF)
+    values (#{typhCenter,jdbcType=VARCHAR}, #{satellitePict,jdbcType=VARCHAR}, #{weatherKorea,jdbcType=VARCHAR}, 
+      #{satelliteAns,jdbcType=VARCHAR}, #{satelliteRedgif,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zju.gislab.SCSServices.po.Webupdate" >
+    insert into WEBUPDATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typhCenter != null" >
+        TYPH_CENTER,
+      </if>
+      <if test="satellitePict != null" >
+        SATELLITE_PICT,
+      </if>
+      <if test="weatherKorea != null" >
+        WEATHER_KOREA,
+      </if>
+      <if test="satelliteAns != null" >
+        SATELLITE_ANS,
+      </if>
+      <if test="satelliteRedgif != null" >
+        SATELLITE_REDGIF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typhCenter != null" >
+        #{typhCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="satellitePict != null" >
+        #{satellitePict,jdbcType=VARCHAR},
+      </if>
+      <if test="weatherKorea != null" >
+        #{weatherKorea,jdbcType=VARCHAR},
+      </if>
+      <if test="satelliteAns != null" >
+        #{satelliteAns,jdbcType=VARCHAR},
+      </if>
+      <if test="satelliteRedgif != null" >
+        #{satelliteRedgif,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.edu.zju.gislab.SCSServices.po.WebupdateExample" resultType="java.lang.Integer" >
+    select count(*) from WEBUPDATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WEBUPDATE
+    <set >
+      <if test="record.typhCenter != null" >
+        TYPH_CENTER = #{record.typhCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.satellitePict != null" >
+        SATELLITE_PICT = #{record.satellitePict,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weatherKorea != null" >
+        WEATHER_KOREA = #{record.weatherKorea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.satelliteAns != null" >
+        SATELLITE_ANS = #{record.satelliteAns,jdbcType=VARCHAR},
+      </if>
+      <if test="record.satelliteRedgif != null" >
+        SATELLITE_REDGIF = #{record.satelliteRedgif,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WEBUPDATE
+    set TYPH_CENTER = #{record.typhCenter,jdbcType=VARCHAR},
+      SATELLITE_PICT = #{record.satellitePict,jdbcType=VARCHAR},
+      WEATHER_KOREA = #{record.weatherKorea,jdbcType=VARCHAR},
+      SATELLITE_ANS = #{record.satelliteAns,jdbcType=VARCHAR},
+      SATELLITE_REDGIF = #{record.satelliteRedgif,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

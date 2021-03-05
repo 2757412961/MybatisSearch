@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zju.gislab.SCSServices.dao.BlogMapper">
+
+    <sql id="TABLE">
+        blog
+    </sql>
+
+    <sql id="FIELD">
+        id, title, author, create_time, views
+    </sql>
+
+    <select id="getBlogIF" parameterType="map" resultType="Blog">
+        SELECT *
+        FROM <include refid="TABLE"/>
+        WHERE 1=1
+        <if test="title != null" >
+            AND title = #{title}
+        </if>
+        <if test="author != null">
+            AND author = #{author}
+        </if>
+    </select>
+
+    <insert id="addBlog" parameterType="Blog">
+        INSERT INTO
+        <include refid="TABLE"/>(
+        <include refid="FIELD"/>
+        )
+        VALUES(#{id}, #{title}, #{author}, #{createTime}, #{views})
+    </insert>
+
+
+
+</mapper>

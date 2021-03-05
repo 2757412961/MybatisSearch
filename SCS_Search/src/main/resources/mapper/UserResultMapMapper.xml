@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zju.gislab.SCSServices.dao.UserResultMapMapper">
+
+    <resultMap id="UserMap" type="UserResultMap">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pwd" property="password"/>
+
+    </resultMap>
+
+    <sql id="TABLENAME">
+        mybatis.user
+    </sql>
+
+    <select id="getUserList" resultMap="UserMap">
+        SELECT *
+        FROM
+        <include refid="TABLENAME"/>
+    </select>
+
+    <select id="getUserByID" parameterType="int" resultType="cn.edu.zju.gislab.SCSServices.po.User">
+        SELECT *
+        FROM
+        <include refid="TABLENAME"/>
+        WHERE id=#{id}
+    </select>
+
+    <select id="getUserLike" parameterType="map" resultType="UserResultMap">
+        SELECT *
+        FROM
+        <include refid="TABLENAME"/>
+        WHERE name like "%"#{mapname}"%" and pwd like "%"#{mappwd}"%"
+    </select>
+
+    <select id="getFieldByMap" parameterType="map" resultType="User">
+        SELECT *
+        FROM
+        <include refid="TABLENAME"/>
+        WHERE ${mapfield} = #{mapvalue}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO<include refid="TABLENAME"/>(name, pwd)
+        VALUE (#{name}, #{pwd})
+    </insert>
+
+    <insert id="addUserByMap" parameterType="map">
+        INSERT INTO<include refid="TABLENAME"/>(name, pwd)
+        VALUE (#{username}, #{userpwd})
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE
+        <include refid="TABLENAME"/>
+        SET name=#{name}, pwd=#{pwd}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUserByID" parameterType="int">
+        DELETE FROM
+        <include refid="TABLENAME"/>
+        WHERE id=#{id}
+    </delete>
+
+
+</mapper>

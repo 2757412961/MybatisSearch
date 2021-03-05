@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zju.gislab.SCSServices.dao.TeacherMapper">
+
+    <select id="getTeacherByID" parameterType="int" resultType="Teacher">
+        SELECT *
+        FROM teacher
+        WHERE id=#{id}
+    </select>
+
+    <!--   多对一 方式一    -->
+    <resultMap id="TeacherMap1" type="Teacher">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+
+        <collection property="students"
+                    column="id"
+                    javaType="ArrayList"
+                    ofType="Student"
+                    select="cn.edu.zju.gislab.SCSServices.dao.StudentMapper.getStudstudentsentsByTID"/>
+    </resultMap>
+
+    <select id="getTeacherD2O1" parameterType="int" resultMap="TeacherMap1">
+        SELECT *
+        FROM teacher
+        WHERE id=#{id}
+    </select>
+
+<!--    <select id="getStudentByID" parameterType="int" resultType="Student">-->
+<!--        SELECT *-->
+<!--        FROM student-->
+<!--        WHERE tid=#{id}-->
+<!--    </select>-->
+
+    <!--    多对一 方式二    -->
+    <resultMap id="TeacherMap2" type="Teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname"/>
+
+        <collection property="students" javaType="ArrayList" ofType="Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+        </collection>
+    </resultMap>
+
+    <select id="getTeacherD2O2" parameterType="int" resultMap="TeacherMap2">
+        SELECT t.id tid, t.name tname, s.id sid, s.name sname
+        FROM teacher t, student s
+        WHERE t.id=#{id} AND t.id=s.tid
+    </select>
+
+</mapper>
