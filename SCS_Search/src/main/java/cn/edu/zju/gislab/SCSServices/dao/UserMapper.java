@@ -15,6 +15,10 @@ public interface UserMapper {
 
     User getUserByID(int id);
 
+    // 缓存
+    User getUserByCache(int id);
+
+    // 注解
     @Select("SELECT * FROM user WHERE name=#{name}")
     List<User> getUsersByName(String name);
 
