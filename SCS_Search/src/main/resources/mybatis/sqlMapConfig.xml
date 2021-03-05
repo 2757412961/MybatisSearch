@@ -12,8 +12,8 @@
         <setting name="multipleResultSetsEnabled" value="true"/>
         <setting name="useColumnLabel" value="true"/>
         <setting name="useGeneratedKeys" value="false"/>
-        <setting name="autoMappingBehavior" value="PARTIAL"/>
-        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <!--        <setting name="autoMappingBehavior" value="PARTIAL"/>-->
+        <!--        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>-->
         <setting name="defaultExecutorType" value="SIMPLE"/>
         <setting name="defaultStatementTimeout" value="25"/>
         <setting name="defaultFetchSize" value="100"/>
